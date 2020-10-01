@@ -21,7 +21,7 @@ db.create_all()
 
 @app.route('/', methods = ['GET'])
 def homepage():
-    return "yaay i'm working"
+    return render_template('index.html')
 
 
 

@@ -1,3 +1,5 @@
+
+/* header elements*/
 html{
     height: 100%;
     width: 100%;
@@ -8,18 +10,56 @@ html{
 body{
     height: 100%;
     width: 100%;
-    background-color: #1a0222;
-    font-family: 'Poppins';
+    background-color: #14021a;
+    font-family: 'Nunito';
 }
 
-.navbar{
-    
+
+
+
+/* landing page elements*/
+.navbar{ 
     box-shadow: none;
 }
 
 .nav-link{
-    color: black !important;
+    color: #ffffff;
     font-weight: 600;
     margin-right: 10px;
 }
 
+.nav-link:hover{
+    color: #b1faff ;
+}
+
+.img-land{
+    padding-top: 50px;
+}
+
+.main-land{
+    padding-top: 140px;
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 40px;
+    font-family: 'Poppins';
+}
+
+.sub-land{
+    color: #ffffff;
+    font-weight: 300;
+    font-size: 20px;
+    font-family: 'Poppins';
+    padding-top: 20px;
+}
+
+.btn-start{
+    background:linear-gradient(135deg, #a155dc 0%,#3a2bf7 100%);
+    color: #ffffff;
+    font-family: 'Poppins';
+    margin-left: 0px;
+    margin-top: 20px;
+}
+
+.btn-start:hover{
+    color: #ffffff;
+}

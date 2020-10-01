@@ -12,13 +12,14 @@ class Users(db.Model,UserMixin):
     password = db.Column(db.String(120), nullable=False)
     email = db.Column(db.String(30), nullable=False, unique = True)
     date_of_joining = db.Column(db.DateTime, default = datetime.datetime.utcnow, nullable = False)
-    user_links = db.relationship('UserSettings', backref="Users")
+    user_links = db.relationship('UserLinks', backref="Users")
 
     def get_id(self):
         return self.uid
     
 class UserLinks(db.Model,UserMixin):
     uid = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4(), unique=True, nullable=False)
+    owner = db.Column(UUID(as_uuid=True), db.ForeignKey('users.uid'))
     name = db.Column(db.String(80), nullable=False)
     original_link = db.Column(db.String, nullable=False)
     short_key = db.Column(db.String(8), nullable=False)
