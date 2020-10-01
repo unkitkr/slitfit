@@ -28,8 +28,19 @@ body{
     margin-right: 10px;
 }
 
+
 .nav-link:hover{
     color: #b1faff ;
+}
+
+.btn-signin{
+    background:linear-gradient(135deg, #a155dc 0%,#3a2bf7 100%);
+    color: #ffffff;
+    font-family: 'Poppins';
+}
+
+.btn-signin:hover{
+    color: #ffffff;
 }
 
 .img-land{
