@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="/static/css/bootstrap.min.css">
@@ -26,7 +25,8 @@
 
     <nav class="navbar navbar-expand-lg">
         <div class="container">
-            <a class="navbar-brand" href="#"><img src="/static/img/slit-logo.png" width="100" style="padding-top: 20px; padding-bottom: 20px;" alt=""></a>
+            <a class="navbar-brand" href="#"><img src="/static/img/slit-logo.png" width="100"
+                    style="padding-top: 20px; padding-bottom: 20px;" alt=""></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -34,16 +34,21 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto" style="margin-top: 10px;">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#"><i class="fa fa-home" aria-hidden="true"></i> Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" style="padding-top: 20px;" href="#"><i class="fa fa-home"
+                                aria-hidden="true"></i> Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fa fa-bolt" aria-hidden="true"></i> Features</a>
+                        <a class="nav-link" style="padding-top: 20px;" href="#"><i class="fa fa-bolt"
+                                aria-hidden="true"></i> Features</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fa fa-info-circle" aria-hidden="true"></i> About</a>
+                        <a class="nav-link" style="padding-top: 20px;" href="#"><i class="fa fa-info-circle"
+                                aria-hidden="true"></i> About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" href="#">Disabled</a>
+                        <a class="nav-link " href="#"><button class="btn btn-signin" style="padding: 8px;" type="button"
+                                data-toggle="modal" data-target="#signinModal"><i class="fa fa-sign-in"
+                                    aria-hidden="true"></i> Signin</button></a>
                     </li>
                 </ul>
             </div>
@@ -53,6 +58,79 @@
     <!-- Navbar ends -->
 
 
+
+    <!-- Signin modal -->
+    <div class="modal fade" id="signinModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true" style="border-radius: 20px !important;">
+        <div class="modal-dialog modal-dialog-centered" role="document" style="border-radius: 10px !important;">
+            <div class="modal-content">
+                <div class="modal-header" style=" background-color: #AB3DFA;">
+                    <h5 class="modal-title" id="exampleModalLabel" style="color: #ffffff"><i class="fa fa-sign-in"
+                            aria-hidden="true"></i> Signin</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" style="color: #ffffff;">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group mb-3" style="margin-bottom: 30px;">
+                        <div class="input-group-prepend"><span class="input-group-text" id="basic-addon1">@</span></div>
+                        <input type="email" name="" class="form-control" id="" placeholder="Email">
+                    </div>
+                    <div class="input-group mb-3" style="margin-bottom: 30px;">
+                        <div class="input-group-prepend"><span class="input-group-text" id="basic-addon1"><i
+                                    class="fas fa-dot-circle    "></i></span></div>
+                        <input type="password" name="" class="form-control" id="" placeholder="Password">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" style="margin: auto;" class="btn btn-secondary"
+                        data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Signin modal ends -->
+
+
+    <!-- Signup modal -->
+    <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true" style="border-radius: 20px !important;">
+        <div class="modal-dialog modal-dialog-centered" role="document" style="border-radius: 10px !important;">
+            <div class="modal-content">
+                <div class="modal-header" style=" background-color: #AB3DFA;">
+                    <h5 class="modal-title" id="exampleModalLabel" style="color: #ffffff">🚀 Signup</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" style="color: #ffffff;">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group mb-3" style="margin-bottom: 30px;">
+                        <div class="input-group-prepend"><span class="input-group-text" id="basic-addon1"><i
+                                    class="fa fa-user-circle" aria-hidden="true"></i></span></div>
+                        <input type="text" name="" class="form-control" id="" placeholder="Name">
+                    </div>
+                    <div class="input-group mb-3" style="margin-bottom: 30px;">
+                        <div class="input-group-prepend"><span class="input-group-text" id="basic-addon1">@</span></div>
+                        <input type="email" name="" class="form-control" id="" placeholder="Email">
+                    </div>
+                    <div class="input-group mb-3" style="margin-bottom: 30px;">
+                        <div class="input-group-prepend"><span class="input-group-text" id="basic-addon1"><i
+                                    class="fas fa-dot-circle    "></i></span></div>
+                        <input type="password" name="" class="form-control" id="" placeholder="Password">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" style="margin: auto;" class="btn btn-secondary"
+                        data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Signup modal ends -->
+
+
+    <!-- home section starts -->
+
     <section class="home-section">
         <div class="container">
             <div class="row ">
@@ -60,7 +138,8 @@
                     <div class="main-land">Shorter, the better<span style="color: #AB3DFA;">.</span></div>
                     <div style="width: 120px; height: 3px; background-color: #AB3DFA;"></div>
                     <div class="sub-land">Making routing experiences better by making long URLs shorter.</div>
-                    <button class="btn btn-start" type="button">Get started 🚀 </button>
+                    <button class="btn btn-start" type="button" data-toggle="modal" data-target="#signupModal">Get
+                        started 🚀 </button>
                 </div>
                 <div class="col-md-7">
                     <img src="/static/img/map.png" class="img-land" width="100%" alt="">
@@ -68,6 +147,8 @@
             </div>
         </div>
     </section>
+
+    <!-- home section ends -->
 
 
 
@@ -78,6 +159,8 @@
     <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="/static/js/mdb.min.js"></script>
+    <!-- fontawesome script -->
+    <script src="https://kit.fontawesome.com/b8afc0faaa.js" crossorigin="anonymous"></script>
 </body>
 
 </html>
