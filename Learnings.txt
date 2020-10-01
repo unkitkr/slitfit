@@ -52,6 +52,25 @@ Learnings:
     b. This would limit the user capability to choose an intutive URL. (pqr.xyz/1 vs pqr.xyz/companyname)
      
 
+Choice of tech stack:
+
+1. Backend/Business logic:
+   Flask (Python framework)
+   Reason: 1. Light weight, gets the server running with as less as 5 lines of code.
+           2. Wanted to play my safe bet initially, I'll rewrite this in JavaScript(NodeJS) later.
+           3. Highly customizable, doesn't include any thing which isn't needed. Install when required
+
+2. Database:
+   PostgreSQL (SQL Based DB)
+   Reason: 1. The server setup is the easiest. High throughput.
+           2. Since it's a SQL database, Query executes really fast over the records.
+           3. Secured.
+
+2. Frontend:
+   Plain HTML/CSS/JS with Bootstrap.
+   Reason: 1. Since it'll be a tightly coupled system where in the backend renders the frontend for the clients
+              using frameworks like vueJS or ReactJS isn't required.
+           2. Vanilla JavaScript is fastest.
 
 
 
