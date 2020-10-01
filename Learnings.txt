@@ -65,6 +65,7 @@ Choice of tech stack:
    Reason: 1. The server setup is the easiest. High throughput.
            2. Since it's a SQL database, Query executes really fast over the records.
            3. Secured.
+           4. SQLAlchemy ORM libary makes development really fast.
 
 2. Frontend:
    Plain HTML/CSS/JS with Bootstrap.
@@ -78,4 +79,4 @@ Choice of tech stack:
 
 Status:
 1st october, 18:16 : Initialize git repository.
-  
+1st october, 20:23 : Wrote initial server and basic models. 
