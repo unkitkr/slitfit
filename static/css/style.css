@@ -1,0 +1,25 @@
+html{
+    height: 100%;
+    width: 100%;
+    font-family: 'Poppins';
+    scroll-behavior: smooth;
+}
+
+body{
+    height: 100%;
+    width: 100%;
+    background-color: #1a0222;
+    font-family: 'Poppins';
+}
+
+.navbar{
+    
+    box-shadow: none;
+}
+
+.nav-link{
+    color: black !important;
+    font-weight: 600;
+    margin-right: 10px;
+}
+

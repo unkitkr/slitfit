@@ -22,3 +22,14 @@ db.create_all()
 @app.route('/', methods = ['GET'])
 def homepage():
     return "yaay i'm working"
+
+
+
+
+
+
+
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
