@@ -1,0 +1,62 @@
+Project start: 1st october, 18:12
+
+Task:
+Description
+Bitly is an application to help you with the short URLs. 
+Let's say you have a URL. You need to send that URL in an SMS. You will be having a character 
+limit for SMS. So it would be nice to shorten your URL to something smaller. 
+
+
+Example:
+Actual URL: https://surveysparrow.com/features/create-a-survey/
+Shortened URL: https://bit.ly/34uqMpV
+
+
+Requirements:
+Develop an ability to shorten URLs.
+Upon opening the shortened URL, redirect to long URL
+
+Nice to have:
+1. User should be able to login to his account
+2. Users can generate multiple short URLs.
+3. Once the user logs in, he should be able to see the list of short URLs he has generated.   
+
+Must dos:
+1. Push your code to a repository in Github. 
+2. Host your application somewhere(Heroku, Netlify or something that you know) and
+   then it should be accessible through the browser by a URL.
+3. Once you have finished your application, with the Github repo URL and your application URL send us 
+   an email to divya@surveysparrow.com, cmb@surveysparrow.com.
+
+
+
+Learnings:
+
+1. Why need shortning services:
+   a. Texting/microbloging platforms have limited number of characters.
+   b. URLs look more intutive
+
+2. URL hashing and mappings:
+   a. Long URLs need to be converted into short URLs and redirected back to original URLs.
+   b. There must not be any kind of collision between the key generated for a long URL with other URLs.
+   c. Rather than using a direct hashing we can use the ID provided by the database.
+
+3. Short commings:
+   1. Database UUIDs:
+    a. Using a database generated UUID will not serve the purpose since it's 36 characters long.
+    b. Use of UUID can be proven as counter intutive. (pqr.xyz/xxxx-xxxx-xxxx-xxxx.... doesn't look good.
+    c. The space consumed in the database to store those links will be considerably high.
+   2. Database AUTO INCREMENT integer primary key.
+    a. Although this looks a promising solution as, low memory consumption (4bytes integer),
+       also, pqr.xyz/<int> looks great but it can lead to a potential failure while merging/migrating database.
+    b. This would limit the user capability to choose an intutive URL. (pqr.xyz/1 vs pqr.xyz/companyname)
+     
+
+
+
+
+
+
+Status:
+1st october, 18:16 : Initialize git repository.
+  
