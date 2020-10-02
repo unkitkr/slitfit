@@ -41,23 +41,98 @@
             <div class="dropdown">
                 <a style="color: #ffffff !important;" class="dropdown-toggle" href="#" role="button"
                     id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="username-navdash">Ankit</span>
+                    <span class="username-navdash">{{ payload.name }}</span>
                 </a>
 
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
+                    <a class="dropdown-item" href="#"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a>
                 </div>
             </div>
         </nav>
     </div>
     <!--/.Navbar -->
 
+    <!-- New Link Modal -->
+    <div class="modal fade" id="newLinkModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true" style="border-radius: 20px !important;">
+        <div class="modal-dialog modal-dialog-centered" role="document" style="border-radius: 10px !important;">
+            <div class="modal-content">
+                <div class="modal-header" style=" background-color: #AB3DFA;">
+                    <h5 class="modal-title" id="exampleModalLabel" style="color: #ffffff"><i class="fa fa-plus-circle"
+                            aria-hidden="true"></i> Create new link</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" style="color: #ffffff;">&times;</span>
+                    </button>
+                </div>
+                <form action="/createnewurl" method="POST">
+                    <div class="modal-body">
+                        <div class="input-group mb-3" style="margin-bottom: 30px;">
+                            <div class="input-group-prepend"><span class="input-group-text" id="basic-addon1"><i
+                                        class="fa fa-file-text" aria-hidden="true"></i></span>
+                            </div>
+                            <input type="text" name="link_name" class="form-control" id=""
+                                placeholder="Name (for your refernce)">
+                        </div>
+                        <div class="input-group mb-3" style="margin-bottom: 30px;">
+                            <div class="input-group-prepend"><span class="input-group-text" id="basic-addon1"><i
+                                        class="fas fa-link"></i></span></div>
+                            <input type="url" name="long_link" class="form-control" id="" placeholder="Long URL">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" style="margin: auto;" class="btn btn-secondary">Create new</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- New link Modal ends -->
+
+    <!-- All links -->
+    <div class="modal fade" id="allLinkModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true" style="border-radius: 20px !important;">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document" style="border-radius: 10px !important;">
+            <div class="modal-content">
+                <div class="modal-header" style=" background-color: #AB3DFA;">
+                    <h5 class="modal-title" id="exampleModalLabel" style="color: #ffffff"><i class="fa fa-external-link-square-alt"
+                            aria-hidden="true"></i> Link routes</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" style="color: #ffffff;">&times;</span>
+                    </button>
+                </div>
+                    <div class="modal-body">
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" style="margin: auto;" data-dismiss="modal" class="btn btn-secondary">CLOSE</button>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <!-- All links ends -->
+
     <!-- main plane -->
 
     <div class="container">
         <div class="row">
+            {% if err %}
+            <div class="col-md-12" style="margin-top: 30px;" id="msg-box">
+                <div class="card">
+                    <div class="card-body" style="padding-top: 10px; padding-bottom:10px;">
+                        <h5 class="card-title" style="font-family: 'Poppins'; font-weight: 500;">Message</h5>
+                        <p class="card-text">
+                            {% if url_msg %}
+                            {{ err }} <a href="{{ url_msg }}">{{ url_msg }}</a>
+                            {% else %}
+                            {{err}}
+                            {% endif %}
+                        </p>
+                    </div>
+                    <button class="btn close-btn-msg" onclick="hide_msg()" type="button">CLOSE</button>
+                </div>
+            </div>
+            {% endif %}
+
             <div class="col-md-6 user-details-plane">
                 <div class="card" style="margin-bottom: 30px !important;">
                     <div class="card-body">
@@ -66,7 +141,7 @@
                                 <i class="fas fa-circle fa-stack-2x" style="color: #deafff;"></i>
                                 <i class="fas fa-hands-wash fa-stack-1x fa-inverse" style="color: #a932ff;"></i>
                             </span>
-                            &nbsp; &nbsp; <span class="greet-hello">Hello! Ankit Kumar</span>
+                            &nbsp; &nbsp; <span class="greet-hello">Hello! {{ payload.name }} </span>
                         </div>
                         <div class="mission-ctrl">This is your mission control center. Explore better. Make
                             experiences better, for you and others.
@@ -84,7 +159,7 @@
                                         <i class="fas fa-link fa-stack-1x fa-inverse" style="color: #a932ff;"></i>
                                     </span>
                                 </h5>
-                                <p class="link-total">12</p>
+                                <p class="link-total"> {{ payload.links_created }} </p>
                                 <p class="link-short">Links Shortened</p>
                             </div>
                         </div>
@@ -100,7 +175,7 @@
                                             style="color: #a932ff;"></i>
                                     </span>
                                 </h5>
-                                <p class="link-total">125</p>
+                                <p class="link-total"> {{ payload.total_visits }} </p>
                                 <p class="link-short">Total Visits</p>
                             </div>
                         </div>
@@ -118,7 +193,7 @@
                                         <i class="fas fa-chart-line fa-stack-1x fa-inverse" style="color: #a932ff;"></i>
                                     </span>
                                 </h5>
-                                <p class="link-total">6</p>
+                                <p class="link-total"> {{ payload.active_links }} </p>
                                 <p class="link-short">Active Links</p>
                             </div>
                         </div>
@@ -134,7 +209,7 @@
                                             style="color: #a932ff;"></i>
                                     </span>
                                 </h5>
-                                <p class="link-total">110</p>
+                                <p class="link-total"> {{ payload.higest_visit }} </p>
                                 <p class="link-short">Higest Visit</p>
                             </div>
                         </div>
@@ -145,7 +220,7 @@
             <div class="col-md-6 links-plane">
                 <div class="card" style="margin-bottom: 30px !important;">
                     <div class="card-body">
-                        <div class="greet">
+                        <div class="greet" style="cursor: pointer;" data-toggle="modal" data-target="#newLinkModal">
                             <span class="fa-stack fa-2x" style="font-size: 25px; padding: 0px; margin: 0px !important;">
                                 <i class="fas fa-circle fa-stack-2x" style="color: #deafff;"></i>
                                 <i class="fas fa-plus-circle fa-stack-1x fa-inverse" style="color: #a932ff;"></i>
@@ -160,14 +235,16 @@
                 </div>
                 <div class="card" style="margin-bottom: 30px !important;">
                     <div class="card-body">
-                        <div class="greet">
+                        <div class="greet" style="cursor: pointer;" data-toggle="modal" data-target="#allLinkModal">
                             <span class="fa-stack fa-2x" style="font-size: 25px; padding: 0px; margin: 0px !important;">
                                 <i class="fas fa-circle fa-stack-2x" style="color: #deafff;"></i>
-                                <i class="fas fa-external-link-square-alt fa-stack-1x fa-inverse" style="color: #a932ff;"></i>
+                                <i class="fas fa-external-link-square-alt fa-stack-1x fa-inverse"
+                                    style="color: #a932ff;"></i>
                             </span>
                             &nbsp; &nbsp; <span class="greet-hello">Links list</span>
                         </div>
-                        <div class="mission-ctrl" style="padding-top: 13px;">Get details of all the links, which were created by you.
+                        <div class="mission-ctrl" style="padding-top: 13px;">Get details of all the links, which were
+                            created by you.
                             Click on the above link icon to get started.
                         </div>
                         <div>&nbsp;</div>
@@ -183,17 +260,16 @@
                             &nbsp; &nbsp; <span class="greet-hello">Account details</span>
                         </div>
                         <div class="row" style="padding-top: 12px;">
-                            <div class="col" style="margin-left: 10px;">
-                                <b>Name:</b> <br>
-                                <b>Email:</b> <br>
+                            <div class="col-sm-7">
+                                <span style="font-weight: 500;">Name: </span>{{ payload.name }} <br>
+                                <span style="font-weight: 500;">Email: </span> {{ payload.email }} <br>
                             </div>
-                            <div class="col-md-6" style="margin-left: 10px;">
-                                <b>Date joined:</b><br>
-                                <b>Membership:</b><br>
-                                
+                            <div class="col-sm-5">
+                                <span style="font-weight: 500;">Date joined: </span> {{ payload.joined }} <br>
+                                <span style="font-weight: 500;">Membership: </span> Free <br>
                             </div>
                         </div>
-                        <div>&nbsp;</div>
+                        &nbsp;
                     </div>
                 </div>
             </div>
@@ -212,6 +288,13 @@
     <script type="text/javascript" src="/static/js/mdb.min.js"></script>
     <!-- fontawesome script -->
     <script src="https://kit.fontawesome.com/b8afc0faaa.js" crossorigin="anonymous"></script>
+    <!-- custom scripts -->
+    <script>
+        function hide_msg() {
+            document.getElementById('msg-box').style.display = 'none';
+            console.log('sdsd');
+        }
+    </script>
 </body>
 
 </html>

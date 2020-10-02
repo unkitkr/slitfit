@@ -11,7 +11,7 @@ class Users(db.Model,UserMixin):
     name = db.Column(db.String(80), nullable=False)
     password = db.Column(db.String(120), nullable=False)
     email = db.Column(db.String(30), nullable=False, unique = True)
-    date_of_joining = db.Column(db.DateTime, default = datetime.datetime.utcnow, nullable = False)
+    date_of_joining = db.Column(db.DateTime, default = datetime.datetime.today().strftime('%d/%m/%Y'), nullable = False)
     user_links = db.relationship('UserLinks', backref="Users")
 
     def get_id(self):
@@ -23,7 +23,7 @@ class UserLinks(db.Model,UserMixin):
     name = db.Column(db.String(80), nullable=False)
     original_link = db.Column(db.String, nullable=False)
     short_key = db.Column(db.String(8), nullable=False)
-    created_on = db.Column(db.DateTime, default = datetime.datetime.utcnow, nullable = False)
+    created_on = db.Column(db.DateTime, default = datetime.datetime.today().strftime('%d/%m/%Y'), nullable = False)
     is_active = db.Column(db.Boolean, default = True, nullable = False)
     visited_times = db.Column(db.Integer, default = 0, nullable = False)
     user_backref = db.relationship("Users", backref="UserLinks")

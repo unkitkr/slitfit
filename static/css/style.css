@@ -143,4 +143,13 @@ body{
     font-family: 'Poppins';
 }
 
+.close-btn-msg{
+    position:absolute;
+    bottom:0; 
+    right:0px; 
+    padding:2px; 
+    background-color: #AB3DFA; 
+    color: #ffffff;
+}
+
 /* Dashboard elements ends */
