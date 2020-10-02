@@ -38,7 +38,7 @@ def signup():
             try:
                 db.session.add(new_user)
                 db.session.commit()
-                return "Done"
+                return render_template('dashboard.html')
 
             except Exception as e:
                 db.session.rollback()
@@ -48,7 +48,20 @@ def signup():
     else:
         return redirect('/')
 
-
+@app.route('/signin', methods = ['GET','POST'])
+def signin():
+    if request.method == 'POST':
+        user_email = request.form['user_email']
+        user_password = request.form['user_password']
+        user_exist = Users.query.filter_by(email = user_email).first()
+        if user_exist:
+            if check_password_hash(user_exist.password, user_password):
+                login_user(user_exist)
+                return render_template('dashboard.html')
+            else:
+                return render_template('index.html', err = "Wrong password")
+        else:
+            return render_template('index.html', err = "User not registered")
 
 
 

@@ -25,5 +25,6 @@ class UserLinks(db.Model,UserMixin):
     short_key = db.Column(db.String(8), nullable=False)
     created_on = db.Column(db.DateTime, default = datetime.datetime.utcnow, nullable = False)
     is_active = db.Column(db.Boolean, default = True, nullable = False)
+    visited_times = db.Column(db.Integer, default = 0, nullable = False)
     user_backref = db.relationship("Users", backref="UserLinks")
     

@@ -83,3 +83,64 @@ body{
 
 /* Landing page elments ends */
 
+
+
+/* Dashboard elements start */
+
+
+.navbar-dash{
+    background-color: #14021a !important;
+}
+.navbar-dash-container{
+    
+    font-family: 'Poppins';
+}
+.username-navdash{
+    font-family: 'Poppins';
+    font-weight: 400;
+    color: #ffffff !important;
+}
+
+.user-details-plane{
+    padding-top: 30px;
+}
+
+.greet-hello{
+    font-family:'Poppins';
+    font-weight: 600;
+    font-size: 22px;
+    vertical-align: middle;
+}
+
+.mission-ctrl{
+    font-family:'Poppins';
+    font-weight: 400;
+    font-size: 16px;
+    vertical-align: middle;
+    margin-left: 10px;
+    padding-top: 10px;
+}
+
+.link-total{
+    font-family: 'Poppins';
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.link-short{
+    font-family: 'Poppins';
+    font-size: 15px;
+    font-weight: 400; 
+    line-height: 0;
+}
+
+
+.links-plane{
+    padding-top: 30px;
+}
+
+.card-body{
+    font-family: 'Poppins';
+}
+
+/* Dashboard elements ends */
