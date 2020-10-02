@@ -23,8 +23,30 @@ db.create_all()
 def homepage():
     return render_template('index.html')
 
+@app.route('/signup', methods = ['POST','GET'])
+def signup():
+    if request.method == 'POST':
+        user_name = request.form['user_name']
+        user_email = request.form['user_email']
+        user_password = request.form['user_password']
 
+        is_email_registered = Users.query.filter_by(email = user_email).first()
 
+        if not is_email_registered:
+            new_user = Users(name = user_name, password = generate_password_hash(user_password), email = user_email)
+
+            try:
+                db.session.add(new_user)
+                db.session.commit()
+                return "Done"
+
+            except Exception as e:
+                db.session.rollback()
+                return str(e)
+        else:
+            return render_template('index.html', err = "The email alreay exixts")
+    else:
+        return redirect('/')
 
 
 

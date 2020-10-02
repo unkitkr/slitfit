@@ -1,4 +1,6 @@
 
+/* Landing page elements */
+
 /* header elements*/
 html{
     height: 100%;
@@ -17,8 +19,8 @@ body{
 
 
 
-/* landing page elements*/
-.navbar{ 
+/* navbar elements*/
+.navbar{
     box-shadow: none;
 }
 
@@ -42,6 +44,9 @@ body{
 .btn-signin:hover{
     color: #ffffff;
 }
+
+
+/* landing page elements */
 
 .img-land{
     padding-top: 50px;
@@ -74,3 +79,7 @@ body{
 .btn-start:hover{
     color: #ffffff;
 }
+
+
+/* Landing page elments ends */
+
