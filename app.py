@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, session, jsonify
 from models import db, Users, UserLinks
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -14,7 +14,9 @@ db.app = app
 db.init_app(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
-login_manager.login_view = 'login'
+login_manager.login_view = '/'
+db.create_all()
+
 
 # Algorithm for creating random IDs
 
@@ -34,16 +36,15 @@ def generate_random_uid(url):
 def load_user(user_id):
     return Users.query.get(user_id)
 
-
-db.create_all()
-
-
 @app.route('/', methods=['GET'])
 def homepage():
-    return render_template('index.html')
+    if not current_user.is_authenticated:
+        return render_template('index.html')
+    else:
+        return redirect('/app/dashboard')
 
 
-@app.route('/signup', methods=['POST', 'GET'])
+@app.route('/app/signup', methods=['POST', 'GET'])
 def signup():
     if request.method == 'POST':
         user_name = request.form['user_name']
@@ -59,7 +60,7 @@ def signup():
             try:
                 db.session.add(new_user)
                 db.session.commit()
-                return render_template('dashboard.html')
+                return render_template('index.html', err= 'Account created. Please login')
 
             except Exception as e:
                 db.session.rollback()
@@ -70,7 +71,7 @@ def signup():
         return redirect('/')
 
 
-@app.route('/signin', methods=['GET', 'POST'])
+@app.route('/app/signin', methods=['GET', 'POST'])
 def signin():
     if request.method == 'POST':
         user_email = request.form['user_email']
@@ -79,25 +80,30 @@ def signin():
         if user_exist:
             if check_password_hash(user_exist.password, user_password):
                 login_user(user_exist)
-                return redirect('/dashboard')
+                return redirect('/app/dashboard')
             else:
                 return render_template('index.html', err="Wrong password")
         else:
             return render_template('index.html', err="User not registered")
 
 
+
+@app.route('/app/dashboard', methods=['GET'])
 @login_required
-@app.route('/dashboard', methods=['GET'])
 def dashboard():
     if request.method == 'GET':
         all_done_links = UserLinks.query.filter_by(
-            owner=current_user.uid).all()
+        owner=current_user.uid).all()
         total_visits = UserLinks.query.filter_by(
             owner=current_user.uid).filter(UserLinks.visited_times > 0).all()
         active_links = UserLinks.query.filter_by(
             owner=current_user.uid).filter_by(is_active=True).all()
         higest_visits = UserLinks.query.filter_by(owner=current_user.uid).all()
-        higest_visited = max([x.visited_times for x in higest_visits])
+        higest_visited = [x.visited_times for x in higest_visits]
+        if higest_visited:
+            higest_visited = max(higest_visited)
+        else:
+            higest_visited = 0
         payload = {
             'name': current_user.name,
             'joined': current_user.date_of_joining.date(),
@@ -112,8 +118,9 @@ def dashboard():
         return render_template('dashboard.html', payload=payload)
 
 
+
+@app.route('/app/createnewurl', methods=['POST'])
 @login_required
-@app.route('/createnewurl', methods=['POST'])
 def create_new_url():
     if request.method == 'POST':
         link_name = request.form['link_name']
@@ -127,13 +134,112 @@ def create_new_url():
                 db.session.add(new_short_url)
                 db.session.commit()
                 redirect_url = "www.slit.fit/"+hashed_url
-                return render_template('dashboard.html', err = "The URL is added succesfully:"+" ", url_msg = redirect_url)
+                return jsonify({
+                    'url': redirect_url,
+                })
 
             except Exception as e:
                 db.session.rollback()
-                return render_template('dashboard.html', err ='OOPs we ran into some problem. Please try again.')
+                print(e)
+                return jsonify({
+                    'error':'Oops! There is an internal database error.'
+                })
         else:
-            return render_template('dashboard.html', err = 'OOPs we ran into some problem. Please try again.')
+            return jsonify({
+                    'error':'Oops! There is an internal server error.'
+                })
+
+
+
+@app.route('/app/deletelink/<link_id>', methods=['POST'])
+@login_required
+def delete(link_id):
+    if request.method == 'POST':
+        id = link_id
+        try:
+            if UserLinks.query.filter_by(uid = link_id):
+                UserLinks.query.filter_by(uid = link_id).delete()
+                db.session.commit()
+                return jsonify({
+                    'success': 'The link has been deleted successfuly',
+                })
+            else:
+                return jsonify({
+                    'error': 'No such link found.',
+                })
+        except Exception as e:
+            db.session.rollback()
+            print(e)
+            return jsonify({
+                'error':'Oops! There is an internal database error.'
+            })
+    else:
+        return jsonify({
+                'error':'Oops! It looks you took wrong route'
+        })
+
+@app.route('/app/delink/<link_id>', methods=['POST'])
+@login_required
+def deactivate_link(link_id):
+    if request.method == 'POST':
+        id = link_id
+        try:
+            if UserLinks.query.filter_by(uid = link_id):
+                UserLinks.query.filter_by(uid = link_id).update(dict(is_active = False))
+                db.session.commit()
+                return jsonify({
+                    'success': 'The link has been deactivated successfuly',
+                })
+            else:
+                return jsonify({
+                    'error': 'No such link found.',
+                })
+        except Exception as e:
+            db.session.rollback()
+            print(e)
+            return jsonify({
+                'error':'Oops! There is an internal database error.'
+            })
+    else:
+        return jsonify({
+                'error':'Oops! It looks you took wrong route'
+        })
+
+
+@app.route('/app/reactivatelink/<link_id>', methods=['POST'])
+@login_required
+def reactivate_link(link_id):
+    if request.method == 'POST':
+        id = link_id
+        try:
+            if UserLinks.query.filter_by(uid = link_id):
+                UserLinks.query.filter_by(uid = link_id).update(dict(is_active = True))
+                db.session.commit()
+                return jsonify({
+                    'success': 'The link has been reactivated successfuly',
+                })
+            else:
+                return jsonify({
+                    'error': 'No such link found.',
+                })
+        except Exception as e:
+            db.session.rollback()
+            print(e)
+            return jsonify({
+                'error':'Oops! There is an internal database error.'
+            })
+    else:
+        return jsonify({
+                'error':'Oops! It looks you took wrong route'
+        })
+
+
+@app.route('/signout', methods=['GET'])
+@login_required
+def signout():
+    logout_user()
+    return redirect('/')
+
 
 
 if __name__ == '__main__':

@@ -45,7 +45,7 @@
                 </a>
 
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" href="#"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a>
+                    <a class="dropdown-item" href="/signout"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a>
                 </div>
             </div>
         </nav>
@@ -64,19 +64,19 @@
                         <span aria-hidden="true" style="color: #ffffff;">&times;</span>
                     </button>
                 </div>
-                <form action="/createnewurl" method="POST">
+                <form id="createURLform">
                     <div class="modal-body">
                         <div class="input-group mb-3" style="margin-bottom: 30px;">
                             <div class="input-group-prepend"><span class="input-group-text" id="basic-addon1"><i
                                         class="fa fa-file-text" aria-hidden="true"></i></span>
                             </div>
-                            <input type="text" name="link_name" class="form-control" id=""
+                            <input type="text" name="link_name" class="form-control" id="link_name"
                                 placeholder="Name (for your refernce)">
                         </div>
                         <div class="input-group mb-3" style="margin-bottom: 30px;">
                             <div class="input-group-prepend"><span class="input-group-text" id="basic-addon1"><i
                                         class="fas fa-link"></i></span></div>
-                            <input type="url" name="long_link" class="form-control" id="" placeholder="Long URL">
+                            <input type="url" name="long_link" class="form-control" id="long_link" placeholder="Long URL">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -91,21 +91,49 @@
     <!-- All links -->
     <div class="modal fade" id="allLinkModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true" style="border-radius: 20px !important;">
-        <div class="modal-dialog modal-dialog-centered modal-lg" role="document" style="border-radius: 10px !important;">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document"
+            style="border-radius: 10px !important;">
             <div class="modal-content">
                 <div class="modal-header" style=" background-color: #AB3DFA;">
-                    <h5 class="modal-title" id="exampleModalLabel" style="color: #ffffff"><i class="fa fa-external-link-square-alt"
-                            aria-hidden="true"></i> Link routes</h5>
+                    <h5 class="modal-title" id="exampleModalLabel" style="color: #ffffff"><i
+                            class="fa fa-external-link-square-alt" aria-hidden="true"></i> Link routes</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true" style="color: #ffffff;">&times;</span>
                     </button>
                 </div>
-                    <div class="modal-body">
-                        
+                <div class="modal-body">
+                    <div class="row">
+                        {% for pay in payload.all_links %}
+                        <div class="col-md-6">
+                            {% if pay.is_active %}
+                            <div class="card" style="border-top: 5px solid #99f359;  margin-bottom: 25px;">
+                            {% else %}
+                            <div class="card" id="" style="border-top: 5px solid #ff4949;  margin-bottom: 25px;">
+                            {% endif %}
+                                <div class="card-body">
+                                    <h5 class="card-title" style="line-height: 1;">{{ pay.name }}</h5>
+                                    <p class="card-text" style="color: #000000; line-height: 1;">Redirects to: <a
+                                            href="http://www.slit.fit/{{ pay.short_key }}">www.slit.fit/{{ pay.short_key }}</a></p>
+                                    <p class="card-text" style="color: #000000; line-height: 1;">Originates: <a
+                                            href="{{ pay.original_link }}">{{ pay.original_link }}</a></p>
+                                    <p class="card-text" style="color: #000000; line-height: 1;">Status: {{ pay.is_active }}</p>
+                                    {% if pay.is_active %}
+                                    <button class="btn close-btn-msg explicit-link-deactive" id="{{ pay.uid }}" type="button">Deactivate</button>
+                                    {% else %}
+                                    <button class="btn close-btn-msg explicit-link-reactive" id="{{ pay.uid }}" type="button">Activate</button>
+                                    {% endif %}
+                                    <button class="btn close-btn-msg explicit-link-delete" style="right: 92px; background-color: #ff4949;"
+                                        type="button" id="{{ pay.uid }}"  >Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" style="margin: auto;" data-dismiss="modal" class="btn btn-secondary">CLOSE</button>
-                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" style="margin: auto;" data-dismiss="modal"
+                        class="btn btn-secondary">CLOSE</button>
+                </div>
             </div>
         </div>
     </div>
@@ -121,17 +149,24 @@
                     <div class="card-body" style="padding-top: 10px; padding-bottom:10px;">
                         <h5 class="card-title" style="font-family: 'Poppins'; font-weight: 500;">Message</h5>
                         <p class="card-text">
-                            {% if url_msg %}
-                            {{ err }} <a href="{{ url_msg }}">{{ url_msg }}</a>
-                            {% else %}
-                            {{err}}
-                            {% endif %}
+                            {{ err }}
                         </p>
                     </div>
                     <button class="btn close-btn-msg" onclick="hide_msg()" type="button">CLOSE</button>
                 </div>
             </div>
             {% endif %}
+            <div class="col-md-12" style="margin-top: 30px; display: none;" id="msg-box-ajax">
+                <div class="card" >
+                    <div class="card-body" style="padding-top: 10px; padding-bottom:10px;">
+                        <h5 class="card-title" style="font-family: 'Poppins'; font-weight: 500;">Message</h5>
+                        <p class="card-text" id="ajax-response">
+                            
+                        </p>
+                    </div>
+                    <button class="btn close-btn-msg" onclick="hide_msg()" type="button">CLOSE</button>
+                </div>
+            </div>
 
             <div class="col-md-6 user-details-plane">
                 <div class="card" style="margin-bottom: 30px !important;">
@@ -289,12 +324,7 @@
     <!-- fontawesome script -->
     <script src="https://kit.fontawesome.com/b8afc0faaa.js" crossorigin="anonymous"></script>
     <!-- custom scripts -->
-    <script>
-        function hide_msg() {
-            document.getElementById('msg-box').style.display = 'none';
-            console.log('sdsd');
-        }
-    </script>
+    <script src = "/static/js/scripts.js"></script>
 </body>
 
 </html>

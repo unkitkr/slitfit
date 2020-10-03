@@ -7,7 +7,7 @@ import datetime
 db = SQLAlchemy()
 
 class Users(db.Model,UserMixin):
-    uid = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4(), unique=True, nullable=False)
+    uid = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, unique=True, nullable=False)
     name = db.Column(db.String(80), nullable=False)
     password = db.Column(db.String(120), nullable=False)
     email = db.Column(db.String(30), nullable=False, unique = True)
@@ -18,7 +18,7 @@ class Users(db.Model,UserMixin):
         return self.uid
     
 class UserLinks(db.Model,UserMixin):
-    uid = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4(), unique=True, nullable=False)
+    uid = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, unique=True, nullable=False)
     owner = db.Column(UUID(as_uuid=True), db.ForeignKey('users.uid'))
     name = db.Column(db.String(80), nullable=False)
     original_link = db.Column(db.String, nullable=False)
