@@ -116,3 +116,15 @@ function hide_msg() {
     document.getElementById('msg-box-ajax').style.display = 'none';
     console.log('sdsd');
 }
+
+function feature_change(feature_id){
+    images = {
+        'manageactivity' : "/static/img/manage.png",
+        'dataanalytics' :"/static/img/data.png",
+        'routing' : "/static/img/routing.png",
+        'easysetup' : "/static/img/setup.png",
+    }
+
+    document.getElementById('img-features').src = images[feature_id];
+    
+}

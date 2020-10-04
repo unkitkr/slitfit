@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Slit| {% block title %} {% endblock %}</title>
+    <title>Slit |{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="/static/css/mdb.min.css">
     <!-- Your custom styles (optional) -->
     <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css">
 </head>
 
 <body>
@@ -32,15 +33,15 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto" style="margin-top: 10px;">
                     <li class="nav-item active">
-                        <a class="nav-link" style="padding-top: 20px;" href="#"><i class="fa fa-home"
+                        <a class="nav-link" style="padding-top: 20px;" href="/"><i class="fa fa-home"
                                 aria-hidden="true"></i> Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" style="padding-top: 20px;" href="#"><i class="fa fa-bolt"
+                        <a class="nav-link" style="padding-top: 20px;" href="/app/features"><i class="fa fa-bolt"
                                 aria-hidden="true"></i> Features</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" style="padding-top: 20px;" href="#"><i class="fa fa-info-circle"
+                        <a class="nav-link" style="padding-top: 20px;" href="/app/about"><i class="fa fa-info-circle"
                                 aria-hidden="true"></i> About</a>
                     </li>
                 </ul>
@@ -51,7 +52,6 @@
     <!-- Navbar ends -->
 
     {% block content %}
-    
     {% endblock %}
 
 
@@ -63,8 +63,11 @@
     <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="/static/js/mdb.min.js"></script>
-    <!-- fontawesome script -->
-    <script src="https://kit.fontawesome.com/b8afc0faaa.js" crossorigin="anonymous"></script>
+    <!-- custom scripts -->
+    <script type="text/javascript" src="/static/js/scripts.js"></script>
+    <script src="https://use.fontawesome.com/fbbdea0b20.js"></script>
+
+    
 </body>
 
 </html>

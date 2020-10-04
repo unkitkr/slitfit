@@ -17,6 +17,10 @@ login_manager.init_app(app)
 login_manager.login_view = '/'
 db.create_all()
 
+@app.errorhandler(404)
+def page_not_found(error):
+   return render_template('error404.html'), 404
+
 
 # Algorithm for creating random IDs
 
@@ -245,7 +249,16 @@ def routeto(route_link):
         return redirect(link.original_link)
 
 
-@app.route('/signout', methods=['GET'])
+@app.route('/app/features', methods=['GET'])
+def features():
+    return render_template('features.html')
+
+@app.route('/app/about', methods=['GET'])
+def about():
+    return render_template('about.html')
+
+
+@app.route('/app/signout', methods=['GET'])
 @login_required
 def signout():
     logout_user()
