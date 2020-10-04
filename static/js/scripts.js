@@ -2,6 +2,8 @@
 
 $(document).ready(function() {
 	$('#createURLform').on('submit', function(event) {
+        document.getElementById('msg-box-ajax').style.display = 'block';
+        $('#newLinkModal').modal('hide');
 		$.ajax({
 			data : {
 				link_name : $('#link_name').val(),
@@ -27,6 +29,7 @@ $(document).ready(function() {
     
 
     $('.explicit-link-delete').on('click', function(event) {
+        document.getElementById('msg-box-ajax').style.display = 'block';
 		$.ajax({
 			data : {
 				link_name : $('.explicit-link-delete').attr('id'),
@@ -51,6 +54,7 @@ $(document).ready(function() {
     
 
     $('.explicit-link-deactive').on('click', function(event) {
+        document.getElementById('msg-box-ajax').style.display = 'block';
 		$.ajax({
 			data : {
 				link_name : $('.explicit-link-deactive').attr('id'),
