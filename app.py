@@ -234,6 +234,17 @@ def reactivate_link(link_id):
         })
 
 
+@app.route('/<route_link>', methods=['GET'])
+def routeto(route_link):
+    if request.method == 'GET':
+        request_link = route_link
+        link = UserLinks.query.filter_by(short_key = route_link).filter_by(is_active = True).first_or_404()
+        print(link.original_link)
+        link.visited_times += 1
+        db.session.commit()
+        return redirect(link.original_link)
+
+
 @app.route('/signout', methods=['GET'])
 @login_required
 def signout():
