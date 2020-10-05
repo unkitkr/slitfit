@@ -7,7 +7,7 @@ import uuid
 import shortuuid
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:SudoAdmin123@localhost/slit"
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://evgsveiywtczmw:fa1cdf6cb9e4be0efd91ef75cb09c703b9e04f84a1b38d40542b49ebf700730"
 app.config['SECRET_KEY'] = '0817PDNTSPA'
 
 db.app = app
@@ -266,4 +266,5 @@ def signout():
 
 
 
-app.run()
+if __name__ == "__main__":
+    app.run()
