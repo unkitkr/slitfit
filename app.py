@@ -8,7 +8,7 @@ import shortuuid
 import os
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://evgsveiywtczmw:fa1cdf6cb9e4be0efd91ef75cb09c703b9e04f84a1b38d40542b49ebf700730"
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://uvbtuywbcawqvz:29a29806bfb53028e73b56236994d2e49e3fdef95faa03f356ccca54cf566d71@ec2-54-224-175-142.compute-1.amazonaws.com:5432/dc86po3cfv3npq"
 app.config['SECRET_KEY'] = '0817PDNTSPA'
 
 db.app = app
