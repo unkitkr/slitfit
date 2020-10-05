@@ -45,11 +45,15 @@ body{
     color: #ffffff;
 }
 
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(211, 166, 242, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+  }
+
 
 /* landing page elements */
 
 .img-land{
-    padding-top: 50px;
+    padding-top: 30px;
 }
 
 .main-land{
@@ -222,3 +226,48 @@ body{
     font-size: 18px;
     color: #ffffff;
 }
+
+
+/* moblile optimizations */
+
+@media only screen and (max-width: 576px) {
+    .main-land{
+        padding-top: 30px;
+    }
+    .main-btn-center{
+        text-align: center;
+    }
+    .main-land{
+        text-align: center;
+    }
+    .sub-land{
+        text-align: center;
+    }
+    .userline-landing{
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .navbar-dash{
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+    .navbar-dash-container{
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+    .features-top{
+        padding-top: 30px;
+    }
+    .img-features{
+        padding-top: 10px;
+    }
+    .about-top-row{
+        padding-top: 30px;
+    }
+    .about-card{
+        margin-bottom: 30px;
+    }
+    .slit-imp-sec{
+        padding-bottom: 50px;
+    }
+  }

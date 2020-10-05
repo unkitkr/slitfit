@@ -36,19 +36,19 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto" style="margin-top: 10px;">
                     <li class="nav-item active">
-                        <a class="nav-link" style="padding-top: 20px;" href="#"><i class="fa fa-home"
+                        <a class="nav-link" style="padding-top: 20px;" href="/"><i class="fa fa-home"
                                 aria-hidden="true"></i> Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" style="padding-top: 20px;" href="#"><i class="fa fa-bolt"
+                        <a class="nav-link" style="padding-top: 20px;" href="/app/features"><i class="fa fa-bolt"
                                 aria-hidden="true"></i> Features</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" style="padding-top: 20px;" href="#"><i class="fa fa-info-circle"
+                        <a class="nav-link" style="padding-top: 20px;" href="/app/about"><i class="fa fa-info-circle"
                                 aria-hidden="true"></i> About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="#"><button class="btn btn-signin" style="padding: 8px;" type="button"
+                        <a class="nav-link " href="#"><button class="btn btn-signin" style="padding: 8px; margin-left: 0px;" type="button"
                                 data-toggle="modal" data-target="#signinModal"><i class="fa fa-sign-in"
                                     aria-hidden="true"></i> Signin</button></a>
                     </li>
@@ -78,12 +78,12 @@
                         <div class="input-group mb-3" style="margin-bottom: 30px;">
                             <div class="input-group-prepend"><span class="input-group-text" id="basic-addon1">@</span>
                             </div>
-                            <input type="email" name="user_email" class="form-control" id="" placeholder="Email">
+                            <input type="email" name="user_email" class="form-control" id="" placeholder="Email" required>
                         </div>
                         <div class="input-group mb-3" style="margin-bottom: 30px;">
                             <div class="input-group-prepend"><span class="input-group-text" id="basic-addon1"><i
                                         class="fas fa-dot-circle    "></i></span></div>
-                            <input type="password" name="user_password" class="form-control" id="" placeholder="Password">
+                            <input type="password" name="user_password" class="form-control" id="" placeholder="Password" required>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -143,12 +143,14 @@
         <div class="container">
             <p style="text-align: center; color: red;">{{ err }}</p>
             <div class="row ">
-                <div class="col-md-5">
+                <div class="col-md-5 order-md-first order-last">
                     <div class="main-land">Shorter, the better<span style="color: #AB3DFA;">.</span></div>
-                    <div style="width: 120px; height: 3px; background-color: #AB3DFA;"></div>
+                    <div class="userline-landing" style="width: 120px; height: 3px; background-color: #AB3DFA;"></div>
                     <div class="sub-land">Making routing experiences better by making long URLs shorter.</div>
-                    <button class="btn btn-start" type="button" data-toggle="modal" data-target="#signupModal">Get
-                        started 🚀 </button>
+                    <p class="main-btn-center">
+                        <button class="btn btn-start" type="button" data-toggle="modal" data-target="#signupModal">Get
+                            started 🚀 </button>
+                    </p>
                 </div>
                 <div class="col-md-7">
                     <img src="/static/img/map.png" class="img-land" width="100%" alt="">
