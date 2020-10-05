@@ -5,6 +5,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.sql import func
 import uuid
 import shortuuid
+import os
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://evgsveiywtczmw:fa1cdf6cb9e4be0efd91ef75cb09c703b9e04f84a1b38d40542b49ebf700730"
