@@ -138,7 +138,7 @@ def create_new_url():
             try:
                 db.session.add(new_short_url)
                 db.session.commit()
-                redirect_url = "www.slit.fit/"+hashed_url
+                redirect_url = "/"+hashed_url
                 return jsonify({
                     'url': redirect_url,
                 })
